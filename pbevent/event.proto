@@ -25,7 +25,8 @@ message EventSettings {
 }
 
 message GetEventRequest {
-  int32 event_id = 1;
+
+  int32 event_id = 1 [(validate.rules).int32 = {gt: 0}];
 }
 message GetEventResponse {
   Event event = 1;

@@ -198,7 +198,12 @@ func (m *GetEventRequest) Validate() error {
 		return nil
 	}
 
-	// no validation rules for EventId
+	if m.GetEventId() <= 0 {
+		return GetEventRequestValidationError{
+			field:  "EventId",
+			reason: "value must be greater than 0",
+		}
+	}
 
 	return nil
 }
