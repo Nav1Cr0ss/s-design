@@ -1,0 +1,48 @@
+syntax = "proto3";
+package pbevent;
+option go_package = "github.com/Nav1Cr0ss/s-design/pbevent";
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+message Event {
+  int32 id = 1;
+  string author_id = 2;
+  string title = 3;
+  string description = 4;
+  string  type = 5;
+  google.protobuf.Timestamp created_at = 6;
+
+}
+
+message EventSettings {
+  int32 id = 1;
+  int32 event_id = 2;
+  int32 max_participants = 3;
+  int32 min_participants = 4;
+  repeated string  visibility = 5;
+}
+
+message GetEventRequest {
+  int32 event_id = 1;
+}
+message GetEventResponse {
+  Event event = 1;
+  EventSettings event_settings = 2;
+}
+
+message CreateEventRequest {
+  string author_id = 2 [(validate.rules).string = {min_len: 10}];
+  string title = 3 [(validate.rules).string = {min_len: 5}];
+  string description = 4 [(validate.rules).string = {min_len: 20}];
+  string  type = 5 [(validate.rules).string = {in: ["online", "offline", "mixed"]}];
+}
+message CreateEventResponse {
+  int32 event_id = 1;
+}
+
+service EventService {
+  rpc GetEvent(GetEventRequest) returns (GetEventResponse) {}
+  rpc CreateEvent(CreateEventRequest) returns (CreateEventResponse) {}
+}
