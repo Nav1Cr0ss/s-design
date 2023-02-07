@@ -21,10 +21,11 @@
 package annotations
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -305,7 +306,7 @@ func (x *Http) GetFullyDecodeReservedExpansion() bool {
 // If a variable contains exactly one path segment, such as `"{var}"` or
 // `"{var=*}"`, when such a variable is expanded into a URL path on the client
 // side, all characters except `[-_.~0-9a-zA-Z]` are percent-encoded. The
-// server side does the reverse decoding. Such variables show up in the
+// navix side does the reverse decoding. Such variables show up in the
 // [Discovery
 // Document](https://developers.google.com/discovery/v1/reference/apis) as
 // `{var}`.
@@ -313,7 +314,7 @@ func (x *Http) GetFullyDecodeReservedExpansion() bool {
 // If a variable contains multiple path segments, such as `"{var=foo/*}"`
 // or `"{var=**}"`, when such a variable is expanded into a URL path on the
 // client side, all characters except `[-_.~/0-9a-zA-Z]` are percent-encoded.
-// The server side does the reverse decoding, except "%2F" and "%2f" are left
+// The navix side does the reverse decoding, except "%2F" and "%2f" are left
 // unchanged. Such variables show up in the
 // [Discovery
 // Document](https://developers.google.com/discovery/v1/reference/apis) as
